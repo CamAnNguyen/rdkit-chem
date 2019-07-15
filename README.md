@@ -1,7 +1,7 @@
 
 # rdkit-chem gem
 
-GEM for [RDKIT](http://rdkit.org/), a chemical library by Geoff Hutchison and others.
+GEM for [RDKIT](http://rdkit.org/), an Open-Source Cheminformatics Software
 
 ## Environment
 
