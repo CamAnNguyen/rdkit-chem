@@ -1,10 +1,10 @@
-$LOAD_PATH = $LOAD_PATH.unshift(File.expand_path('../lib', __dir__))
+$:.unshift File.expand_path('../lib', __FILE__)
 
-require 'rdkit/version'
+require 'rdkit_chem/version'
 
 Gem::Specification.new do |s|
-  s.name               = 'rdkit-chem'
-  s.version            = RDKit::GEMVERSION
+  s.name               = 'rdkit_chem'
+  s.version            = RDKitChem::GEMVERSION
 
   s.authors = ['An Nguyen']
   s.date = '2019-07-15'
@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '0.0.1'
   s.summary = 'Ruby gem for RDKit !'
   s.license = 'BSD'
-  s.test_files = ['test/test_rdkit.rb']
+  s.test_files = ['test/test_rdkit_chem.rb']
 
-  s.files = %w[Rakefile lib/rdkit.rb lib/openbabel/version.rb]
-  s.extensions = ['ext/openbabel/extconf.rb']
+  s.files = %w[Rakefile lib/rdkit_chem.rb lib/rdkit_chem/version.rb]
+  s.extensions = ['ext/rdkit_chem/extconf.rb']
 end

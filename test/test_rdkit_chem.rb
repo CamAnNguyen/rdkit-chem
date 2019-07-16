@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require 'rdkit'
+require 'rdkit_chem'
 include RDKit
 
 class RDKitTest < Test::Unit::TestCase

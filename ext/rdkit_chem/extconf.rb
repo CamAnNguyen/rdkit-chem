@@ -32,10 +32,10 @@ FileUtils.mkdir_p install_dir
 Dir.chdir build_dir do
   puts 'Configuring RDKit'
 
-  cmake = "cmake #{src_dir} -DCMAKE_INSTALL_PREFIX=#{install_dir} " +
-          "-DCMAKE_BUILD_TYPE=Release -DRDK_BUILD_PYTHON_WRAPPERS=OFF " +
-          "-DRDK_BUILD_SWIG_WRAPPERS=ON -DRDK_BUILD_INCHI_SUPPORT=ON " +
-          "-DBOOST_ROOT=/usr/include/"
+  cmake = "cmake #{src_dir} -DCMAKE_INSTALL_PREFIX=#{install_dir} " \
+          '-DCMAKE_BUILD_TYPE=Release -DRDK_BUILD_PYTHON_WRAPPERS=OFF ' \
+          '-DRDK_BUILD_SWIG_WRAPPERS=ON -DRDK_BUILD_INCHI_SUPPORT=ON ' \
+          '-DBOOST_ROOT=/usr/include/'
   system cmake
 end
 
@@ -47,7 +47,7 @@ Dir.chdir build_dir do
 end
 
 # create a fake Makefile
-File.open(File.join(File.dirname(__FILE__),"Makefile"),"w+") do |makefile|
+File.open(File.join(File.dirname(__FILE__), 'Makefile'), "w+") do |makefile|
   makefile.puts "all:\n\ttrue\n\ninstall:\n\ttrue\n"
 end
 
