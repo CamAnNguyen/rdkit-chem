@@ -36,6 +36,6 @@
 #include <AvalonTools/AvalonTools.h>
 %}
 
-%template(StringInt_Pair) std::pair<std::string, int >;
+%template(StringIntPair) std::pair<std::string, int >;
 %include <AvalonTools/AvalonTools.h>
 

@@ -40,6 +40,7 @@
 %}
 
 %template(UIntPair) std::pair<boost::uint32_t,boost::uint32_t>;
+// %template(UIntPairVect) std::vector<std::pair<boost::uint32_t,boost::uint32_t> >;
 %template(BitInfoMap) std::map<boost::uint32_t,std::vector<std::pair<boost::uint32_t,boost::uint32_t> > >;
 
 %newobject RDKit::RDKFingerprintMol;

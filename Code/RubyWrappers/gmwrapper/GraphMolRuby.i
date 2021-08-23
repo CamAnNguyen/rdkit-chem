@@ -69,6 +69,7 @@
 %include <boost/smart_ptr/shared_array.hpp>
 
 /* undefine RDKIT_<LIBNAME>_EXPORT macros */
+%include <RDGeneral/RDExportMacros.h>
 %include <RDGeneral/export.h>
 /* Include the base types before anything that will utilize them */
 #ifdef SWIGWIN
@@ -139,7 +140,6 @@ typedef unsigned long long int	uintmax_t;
 %shared_ptr(RDKit::AtomKekulizeException)
 %shared_ptr(RDKit::KekulizeException)
 %shared_ptr(RDKit::SmilesParseException)
-%shared_ptr(RDKit::MolPicklerException)
 %shared_ptr(RDKit::RingInfo)
 %shared_ptr(RDKit::ChemicalReaction)
 %shared_ptr(ForceFields::ForceFieldContrib);
@@ -150,25 +150,6 @@ typedef unsigned long long int	uintmax_t;
 %shared_ptr(ForceFields::UFF::TorsionAngleContrib);
 %shared_ptr(ForceFields::UFF::InversionContrib);
 %shared_ptr(RDKit::FilterCatalogEntry);
-
-/* http://swig.10945.n7.nabble.com/std-containers-and-pointers-td3728.html */
-%{
-  /* template <> struct swig::traits<RDKit::ROMol> { */
-  /*   typedef pointer_category category; */
-  /*   static const char* type_name() */
-  /*   { */
-  /*     return "ROMol"; */
-  /*   } */
-  /* }; */
-
-  /* template <> struct swig::traits<ForceFields::UFF::AtomicParams> { */
-  /*   typedef pointer_category category; */
-  /*   static const char* type_name() */
-  /*   { */
-  /*     return "AtomicParams"; */
-  /*   } */
-  /* }; */
-%}
 
 /* Some utility classes for passing arrays in and out */
 %array_class(double, Double_Array);
@@ -417,7 +398,13 @@ typedef RDKit::MatchVectType MatchVectType;
 %include "../FilterCatalog.i"
 %include "../Trajectory.i"
 %include "../MolStandardize.i"
+%include "../RGroupDecomposition.i"
 %include "../SubstructLibrary.i"
+%include "../ScaffoldNetwork.i"
+%include "../TautomerQuery.i"
+%include "../SubstanceGroup.i"
+%include "../MolHash.i"
+%include "../Abbreviations.i"
 %include "../Streams.i"
 
 %include "../RGroupDecomposition.i"

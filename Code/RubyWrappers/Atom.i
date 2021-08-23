@@ -50,7 +50,9 @@
 %}
 
 %ignore RDKit::Atom::Match(const Atom *) const;
-%template(Bond_Vect) std::vector<RDKit::Bond*>;
+
+VECTORTEMPLATE_WRAP(Bond, RDKit::Bond*)
+// %template(BondVect) std::vector<RDKit::Bond*>;
 
 %include <GraphMol/Atom.h>
 
@@ -105,6 +107,15 @@
       begin++;
     }
     return bonds;
+  }
+
+  // also matches ATOM_NULL_QUERY
+  void setQuery(RDKit::ATOM_OR_QUERY *query) {
+    $self->setQuery(query);
+  }
+
+  void setQuery(RDKit::ATOM_EQUALS_QUERY *query) {
+    $self->setQuery(query);
   }
 
 }

@@ -25,7 +25,7 @@ Dir.chdir main_dir do
 end
 
 Dir.chdir(src_dir) do
-  checkout = 'git checkout 39bcee635e0ee8bc5da6798318fdcd4602c4baa6'
+  checkout = 'git checkout 9aa949576'
   system checkout
 end
 
@@ -42,7 +42,7 @@ FileUtils.cp_r(
 )
 
 env_boost_root = ENV['BOOST_ROOT'] || ''
-boost_root = env_boost_root.empty? ? '/usr/include' : env_boost_root
+boost_root = env_boost_root.empty? ? '/usr/local/include' : env_boost_root
 
 host_os = RbConfig::CONFIG['host_os']
 is_linux = host_os =~ /linux/
@@ -64,6 +64,7 @@ Dir.chdir build_dir do
   cmake = "#{ld_path} cmake #{src_dir} -DRDK_INSTALL_INTREE=OFF " \
           "-DCMAKE_INSTALL_PREFIX=#{install_dir} " \
           '-DCMAKE_BUILD_TYPE=Release -DRDK_BUILD_PYTHON_WRAPPERS=OFF ' \
+          '-DRDK_BUILD_RUBY_WRAPPERS=ON ' \
           '-DRDK_BUILD_SWIG_WRAPPERS=ON -DRDK_BUILD_INCHI_SUPPORT=ON ' \
           "-DBOOST_ROOT=#{boost_root} -DBoost_NO_BOOST_CMAKE=ON"
   system cmake
@@ -77,7 +78,7 @@ Dir.chdir build_dir do
 end
 
 # Remove compiled file, free spaces
-FileUtils.remove_dir(rdkit_dir)
+# FileUtils.remove_dir(rdkit_dir)
 
 # create a fake Makefile
 File.open(File.join(File.dirname(__FILE__), 'Makefile'), 'w+') do |makefile|

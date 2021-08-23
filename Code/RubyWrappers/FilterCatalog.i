@@ -32,7 +32,8 @@
 //%import "ROMol.i"
 %include "std_string.i"
 %include "std_vector.i"
-
+%include <boost_shared_ptr.i>
+%shared_ptr(RDKit::FilterCatalogEntry)
 
 %{
 #include <../RDGeneral/Dict.h>
@@ -42,16 +43,25 @@
 #include <GraphMol/FilterCatalog/FilterCatalogEntry.h>
 #include <GraphMol/FilterCatalog/FilterCatalog.h>
 
-  // bug fix for swig, it removes these from their namespaces
-  typedef RDCatalog::Catalog<RDKit::FilterCatalogEntry, RDKit::FilterCatalogParams>::paramType_t paramType_t;
-  typedef RDCatalog::Catalog<RDKit::FilterCatalogEntry, RDKit::FilterCatalogParams>::entryType_t entryType_t;
-  typedef std::vector<std::string> STR_VECT;
+// bug fix for swig, it removes these from their namespaces
+typedef RDCatalog::Catalog<RDKit::FilterCatalogEntry, RDKit::FilterCatalogParams>::paramType_t paramType_t;
+typedef RDCatalog::Catalog<RDKit::FilterCatalogEntry, RDKit::FilterCatalogParams>::entryType_t entryType_t;
+typedef std::vector<std::string> STR_VECT;
 %}
 
-%feature("ignore") std::vector< boost::shared_ptr<RDKit::FilterCatalogEntry> >::equals;
-%template(FilterCatalogEntry_Vect) std::vector< boost::shared_ptr<RDKit::FilterCatalogEntry> >;
+VECTORTEMPLATE_WRAP(FilterCatalogEntry, boost::shared_ptr<RDKit::FilterCatalogEntry>)
+// %template(FilterCatalogEntryVect) std::vector< boost::shared_ptr<RDKit::FilterCatalogEntry> >;
+VVTEMPLATE_WRAP(FilterCatalogEntry, boost::shared_ptr<RDKit::FilterCatalogEntry>)
+// %template(FilterCatalogEntryVectVect) std::vector<std::vector< boost::shared_ptr<const RDKit::FilterCatalogEntry> > >;
 
-/* %include "enums.swg" */
+VECTORTEMPLATE_WRAP(FilterCatalogEntry, const RDKit::FilterCatalogEntry*)
+// %template(FilterCatalogEntryVect) std::vector< const RDKit::FilterCatalogEntry* >;
+VECTORTEMPLATE_WRAP(UChar, unsigned char)
+// %template(UCharVect) std::vector<unsigned char>;
+VECTORTEMPLATE_WRAP(FilterMatch, RDKit::FilterMatch)
+// %template(FilterMatchVect) std::vector<RDKit::FilterMatch>;
+
+// %include "enums.swg"
 
 %include <../RDGeneral/Dict.h>
 %include <../Catalogs/Catalog.h>
@@ -94,20 +104,21 @@
   //  unthinkable and cast away const.
   //  Also we can't use FilterCatalog::SENTRY because swig thinks it is a new
   //   type.  Bad swig!
-  /* boost::shared_ptr<RDKit::FilterCatalogEntry> getFirstMatch(const ROMol &mol) { */
-  /*   RDKit::FilterCatalog::CONST_SENTRY res = self->getFirstMatch(mol); */
-  /*   return boost::const_pointer_cast<RDKit::FilterCatalogEntry>(res); */
-  /* } */
 
- /*  std::vector<boost::shared_ptr<RDKit::FilterCatalogEntry> > getMatches(const ROMol &mol) { */
- /*    std::vector<RDKit::FilterCatalog::CONST_SENTRY> matches = self->getMatches(mol); */
- /*    std::vector<RDKit::FilterCatalog::SENTRY> res; */
- /*    res.reserve(matches.size()); */
- /*    for (size_t i=0; i< matches.size(); ++i) { */
- /*      res.push_back( boost::const_pointer_cast<RDKit::FilterCatalogEntry>(matches[i]) ); */
- /*    } */
- /*    return res; */
- /* } */
+//   boost::shared_ptr<RDKit::FilterCatalogEntry> getFirstMatch(const ROMol &mol) {
+//     RDKit::FilterCatalog::CONST_SENTRY res = self->getFirstMatch(mol);
+//     return boost::const_pointer_cast<RDKit::FilterCatalogEntry>(res);
+//   }
+
+//   std::vector<boost::shared_ptr<RDKit::FilterCatalogEntry> > getMatches(const ROMol &mol) {
+//     std::vector<RDKit::FilterCatalog::CONST_SENTRY> matches = self->getMatches(mol);
+//     std::vector<RDKit::FilterCatalog::SENTRY> res;
+//     res.reserve(matches.size());
+//     for (size_t i=0; i< matches.size(); ++i) {
+//       res.push_back( boost::const_pointer_cast<RDKit::FilterCatalogEntry>(matches[i]) );
+//     }
+//     return res;
+//  }
 
   // re-wrap swig is making duplicate entries for some strange reason
   unsigned int addEntry(boost::shared_ptr<RDKit::FilterCatalogEntry> entry) {

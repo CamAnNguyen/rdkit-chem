@@ -51,8 +51,13 @@
 #endif
 
 %template(IntDoubleMap) std::map< int, double >;
-%template(ROMolPtrVect) std::vector<RDKit::ROMol*>;
-%template(Point2DVect) std::vector<RDGeom::Point2D *>;
+%template(FloatPair) std::pair<float,float>;
+
+// VECTORTEMPLATE_WRAP(FloatPair, FloatPair)
+// %template(FloatPairVect) std::vector< std::pair<float,float> >;
+
+// %template(ROMolPtrVect) std::vector<RDKit::ROMol*>;
+// %template(Point2DVect) std::vector<RDGeom::Point2D *>;
 
 %ignore RDKit::MolDraw2DSVG::MolDraw2DSVG(int,int,std::ostream &);
 %ignore RDKit::MolDraw2DUtils::contourAndDrawGaussians(
@@ -88,7 +93,7 @@
     void ContourAndDrawGaussians(
     RDKit::MolDraw2D &drawer, const std::vector<RDGeom::Point2D *> &p_locs,
     const std::vector<double> &heights, const std::vector<double> &widths,
-    size_t nContours = 10,
+    size_t nContours = 10, 
     const RDKit::MolDraw2DUtils::ContourParams &ps = RDKit::MolDraw2DUtils::ContourParams()){
         std::vector<Point2D> locs;
         locs.reserve(p_locs.size());

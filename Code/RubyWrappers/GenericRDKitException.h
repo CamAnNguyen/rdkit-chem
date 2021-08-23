@@ -11,15 +11,16 @@
 
 #include <RDGeneral/export.h>
 #include <exception>
+#include <string>
 
 namespace RDKit {
 
 class GenericRDKitException : public std::exception {
  public:
-  GenericRDKitException(const std::string &i) : _value(i){};
-  GenericRDKitException(const char *msg) : _value(msg){};
-  const char *what() const noexcept override { return _value.c_str(); };
-  ~GenericRDKitException() noexcept {};
+  GenericRDKitException(const std::string &i) : _value(i) {}
+  GenericRDKitException(const char *msg) : _value(msg) {}
+  const char *what() const noexcept override { return _value.c_str(); }
+  ~GenericRDKitException() noexcept = default;
 
  private:
   std::string _value;

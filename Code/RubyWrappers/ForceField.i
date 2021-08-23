@@ -64,8 +64,8 @@
 %include <ForceField/UFF/TorsionAngle.h>
 %include <ForceField/UFF/Inversion.h>
 
-%feature("ignore") std::vector<ForceFields::ContribPtr>::equals;
-%template(FF_Contrib_Vect) std::vector<ForceFields::ContribPtr>;
+// VECTORTEMPLATE_WRAP(FFContrib, ForceFields::ContribPtr)
+// %template(FFContribVect) std::vector<ForceFields::ContribPtr>;
 
 %extend ForceFields::ForceField {
   std::vector<RDGeom::Point3D *> &positions3D () {

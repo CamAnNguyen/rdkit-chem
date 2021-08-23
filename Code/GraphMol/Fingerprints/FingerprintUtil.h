@@ -93,7 +93,7 @@ class RDKIT_FINGERPRINTS_EXPORT ss_matcher {
   ss_matcher();
   ss_matcher(const std::string &pattern);
 
-  // const RDKit::ROMOL_SPTR &getMatcher() const { return m_matcher; };
+  // const RDKit::ROMOL_SPTR &getMatcher() const { return m_matcher; }
   const RDKit::ROMol *getMatcher() const;
 
  private:
@@ -107,7 +107,6 @@ RDKIT_FINGERPRINTS_EXPORT extern std::vector<std::string> defaultFeatureSmarts;
 
 //! returns the connectivity invariants for a molecule
 /*!
-
   \param mol :    the molecule to be considered
   \param invars : used to return the results
   \param includeRingMembership : if set, whether or not the atom is in
@@ -120,7 +119,6 @@ const std::string morganConnectivityInvariantVersion = "1.0.0";
 
 //! returns the feature invariants for a molecule
 /*!
-
   \param mol:    the molecule to be considered
   \param invars : used to return the results
   \param patterns: if provided should contain the queries used to assign
@@ -129,11 +127,10 @@ const std::string morganConnectivityInvariantVersion = "1.0.0";
                    Gobbi and Poppinger, Biotech. Bioeng. _61_ 47-54 (1998)
                    will be used for Donor, Acceptor, Aromatic, Halogen, Basic,
   Acidic
-
 */
 RDKIT_FINGERPRINTS_EXPORT void getFeatureInvariants(
     const ROMol &mol, std::vector<std::uint32_t> &invars,
-    std::vector<const ROMol *> *patterns = 0);
+    std::vector<const ROMol *> *patterns = nullptr);
 const std::string morganFeatureInvariantVersion = "0.1.0";
 
 }  // namespace MorganFingerprints
